@@ -1,29 +1,23 @@
 namespace com.logali;
 
-using {cuid} from '@sap/cds/common';
+entity HEADER {
+    key ID             : String @Core.Computed;
+    key EMAIL          : String;
+        FIRSTNAME      : String;
+        LASTNAME       : String;
+        COUNTRY        : String;
+        CREATEON       : Date default $now;
+        DELIVERYSTATUS : DateTime default $now;
+        ORDERSTATUS    : Integer;
+        IMAGEURL       : String;
+        ITEMS          : Composition of ITEMS;
+};
 
-context salesOrder {
-
-    entity HEADER : cuid {
-        key EMAIL          : String;
-            FIRSTNAME      : String;
-            LASTNAME       : String;
-            COUNTRY        : String;
-            CREATEON       : Date default $now;
-            DELIVERYSTATUS : DateTime default $now;
-            ORDERSTATUS    : Integer;
-            IMAGEURL       : String;
-            ITEM           : Composition of many ITEMS
-                                 on ITEM.HEADER = $self
-    };
-
-    entity ITEMS : cuid {
-        NAME            : String;
-        DESCRIPTION     : String;
-        RELEASEDATE     : Date default $now;
-        DISCONTINUEDATE : Date default $now;
-        PRICE           : Decimal(12, 2);
-        HEADER          : Association to HEADER;
-    };
-
-}
+entity ITEMS {
+    key ID          : String @Core.Computed;
+    NAME            : String;
+    DESCRIPTION     : String;
+    RELEASEDATE     : Date default $now;
+    DISCONTINUEDATE : Date default $now;
+    PRICE           : Decimal(12, 2);
+};

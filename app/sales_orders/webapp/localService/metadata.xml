@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="Mangeorders" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="salesOrder" EntityType="Mangeorders.salesOrder">
+                    <NavigationPropertyBinding Path="ITEMS" Target="ITEMS"/>
+                </EntitySet>
+                <EntitySet Name="CreateOrders" EntityType="Mangeorders.CreateOrders">
+                    <NavigationPropertyBinding Path="ITEMS" Target="ITEMS"/>
+                </EntitySet>
+                <EntitySet Name="ITEMS" EntityType="Mangeorders.ITEMS"/>
+            </EntityContainer>
+            <EntityType Name="salesOrder">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="EMAIL"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="EMAIL" Type="Edm.String" Nullable="false"/>
+                <Property Name="FIRSTNAME" Type="Edm.String"/>
+                <Property Name="LASTNAME" Type="Edm.String"/>
+                <Property Name="COUNTRY" Type="Edm.String"/>
+                <Property Name="CREATEON" Type="Edm.Date"/>
+                <Property Name="DELIVERYSTATUS" Type="Edm.DateTimeOffset"/>
+                <Property Name="ORDERSTATUS" Type="Edm.Int32"/>
+                <Property Name="IMAGEURL" Type="Edm.String"/>
+                <NavigationProperty Name="ITEMS" Type="Mangeorders.ITEMS">
+                    <OnDelete Action="Cascade"/>
+                    <ReferentialConstraint Property="ITEMS_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="ITEMS_ID" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="CreateOrders">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="EMAIL"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="EMAIL" Type="Edm.String" Nullable="false"/>
+                <Property Name="FIRSTNAME" Type="Edm.String"/>
+                <Property Name="LASTNAME" Type="Edm.String"/>
+                <Property Name="COUNTRY" Type="Edm.String"/>
+                <Property Name="CREATEON" Type="Edm.Date"/>
+                <Property Name="DELIVERYSTATUS" Type="Edm.DateTimeOffset"/>
+                <Property Name="ORDERSTATUS" Type="Edm.Int32"/>
+                <Property Name="IMAGEURL" Type="Edm.String"/>
+                <NavigationProperty Name="ITEMS" Type="Mangeorders.ITEMS">
+                    <OnDelete Action="Cascade"/>
+                    <ReferentialConstraint Property="ITEMS_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="ITEMS_ID" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="ITEMS">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="NAME" Type="Edm.String"/>
+                <Property Name="DESCRIPTION" Type="Edm.String"/>
+                <Property Name="RELEASEDATE" Type="Edm.Date"/>
+                <Property Name="DISCONTINUEDATE" Type="Edm.Date"/>
+                <Property Name="PRICE" Type="Edm.Decimal" Scale="2" Precision="12"/>
+            </EntityType>
+            <Annotations Target="Mangeorders.salesOrder/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="Mangeorders.salesOrder/CREATEON">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="Mangeorders.salesOrder/DELIVERYSTATUS">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="Mangeorders.CreateOrders/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="Mangeorders.CreateOrders/CREATEON">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="Mangeorders.CreateOrders/DELIVERYSTATUS">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="Mangeorders.ITEMS/ID">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+            <Annotations Target="Mangeorders.ITEMS/RELEASEDATE">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="Mangeorders.ITEMS/DISCONTINUEDATE">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

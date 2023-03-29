@@ -2,7 +2,7 @@ using {com.logali as sch} from '../db/schema';
 
 service Order {
     entity salesOrder as
-        select from sch.salesOrder.HEADER {
+        select from sch.HEADER {
             EMAIL @mandatory,
             FIRSTNAME,
             LASTNAME,
@@ -11,6 +11,6 @@ service Order {
             DELIVERYSTATUS,
             ORDERSTATUS,
             IMAGEURL,
-            ITEM,
+            ITEMS,
         };
 }
